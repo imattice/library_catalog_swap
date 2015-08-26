@@ -68,5 +68,19 @@
             $result = Book::getAll();
             $this->assertEquals([], $result);
         }
+
+        function test_getId() {
+            //Arrange
+            $author = "Dr. Seuss";
+            $title = "The Cat in the Hat";
+            $test_book = new Book($author, $title);
+            $test_book->save();
+
+            //Act
+            $result = $test_book->getId();
+
+            //Assert
+            $this->assertEquals(true, is_numeric($result));
+        }
     }
 ?>

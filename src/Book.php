@@ -23,10 +23,10 @@ class Book
         return $this->title;
     }
 
-    // function getId()
-    // {
-    //     return $this->id;
-    // }
+    function getId()
+    {
+        return $this->id;
+    }
 
     function save()
     {
