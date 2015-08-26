@@ -20,9 +20,10 @@
 
         function test_save() {
             //Arrange
-            $author = "Dr. Seuss";
+            $author_first = "Dr.";
+            $author_last = "Seuss";
             $title = "The Cat in the Hat";
-            $test_book = new Book($author, $title);
+            $test_book = new Book($author_first, $author_last, $title);
 
             //Act
             $test_book->save();
@@ -34,13 +35,15 @@
 
         function test_getAll() {
             //Arrange
-            $author = "Dr. Seuss";
+            $author_first = "Dr.";
+            $author_last = "Seuss";
             $title = "The Cat in the Hat";
-            $test_book = new Book($author, $title);
+            $test_book = new Book($author_first, $author_last, $title);
             $test_book->save();
-            $author2 = "Stephen King";
+            $author_first2 = "Stephen";
+            $author_last2 = "King";
             $due_date2 = "Misery";
-            $test_book2 = new Book($author2, $due_date2);
+            $test_book2 = new Book($author_first2, $author_last2, $due_date2);
             $test_book2->save();
 
             //Act
@@ -52,13 +55,15 @@
 
         function test_deleteAll() {
             //Arrange
-            $author = "Dr. Seuss";
+            $author_first = "Dr.";
+            $author_last = "Seuss";
             $title = "The Cat in the Hat";
-            $test_book = new Book($author, $title);
+            $test_book = new Book($author_first, $author_last, $title);
             $test_book->save();
-            $author2 = "Stephen King";
+            $author_first2 = "Stephen";
+            $author_last2 = "King";
             $due_date2 = "Misery";
-            $test_book2 = new Book($author2, $due_date2);
+            $test_book2 = new Book($author_first2, $author_last2, $due_date2);
             $test_book2->save();
 
             //Act
@@ -71,9 +76,10 @@
 
         function test_getId() {
             //Arrange
-            $author = "Dr. Seuss";
+            $author_first = "Dr.";
+            $author_last = "Seuss";
             $title = "The Cat in the Hat";
-            $test_book = new Book($author, $title);
+            $test_book = new Book($author_first, $author_last, $title);
             $test_book->save();
 
             //Act
@@ -85,13 +91,15 @@
 
         function test_find() {
             //Arrange
-            $author = "Dr. Seuss";
+            $author_first = "Dr.";
+            $author_last = "Seuss";
             $title = "The Cat in the Hat";
-            $test_book = new Book($author, $title);
+            $test_book = new Book($author_first, $author_last, $title);
             $test_book->save();
-            $author2 = "Stephen King";
+            $author_first2 = "Stephen";
+            $author_last2 = "King";
             $due_date2 = "Misery";
-            $test_book2 = new Book($author2, $due_date2);
+            $test_book2 = new Book($author_first2, $author_last2, $due_date2);
             $test_book2->save();
 
             //Act
@@ -102,26 +110,44 @@
             $this->assertEquals($test_book, $result);
         }
 
-        function testUpdateAuthor() {
+        function testUpdateAuthorFirst() {
             //Arrange
-            $author = "Dr. Seuss";
+            $author_first = "Dr.";
+            $author_last = "Seuss";
             $title = "The Cat in the Hat";
-            $test_book = new Book($author, $title);
+            $test_book = new Book($author_first, $author_last, $title);
             $test_book->save();
-            $new_author = "Theodore Geissel";
+            $new_author_first = "Theodore";
 
             //Act
-            $test_book->updateAuthor($new_author);
+            $test_book->updateAuthorFirst($new_author_first);
 
             //Assert
-            $this->assertEquals("Theodore Geissel", $test_book->getAuthor());
+            $this->assertEquals("Theodore", $test_book->getAuthorFirst());
+        }
+
+        function testUpdateAuthorLast() {
+            //Arrange
+            $author_first = "Dr.";
+            $author_last = "Seuss";
+            $title = "The Cat in the Hat";
+            $test_book = new Book($author_first, $author_last, $title);
+            $test_book->save();
+            $new_author_last = "Geissel";
+
+            //Act
+            $test_book->updateAuthorLast($new_author_last);
+
+            //Assert
+            $this->assertEquals("Geissel", $test_book->getAuthorLast());
         }
 
         function testUpdateTitle() {
             //Arrange
-            $author = "Dr. Seuss";
+            $author_first = "Dr.";
+            $author_last = "Seuss";
             $title = "The Cat in the Hat";
-            $test_book = new Book($author, $title);
+            $test_book = new Book($author_first, $author_last, $title);
             $test_book->save();
             $new_title = "Green Eggs and Ham";
 
@@ -134,13 +160,15 @@
 
         function testDeleteOne() {
             //Arrange
-            $author = "Dr. Seuss";
+            $author_first = "Dr.";
+            $author_last = "Seuss";
             $title = "The Cat in the Hat";
-            $test_book = new Book($author, $title);
+            $test_book = new Book($author_first, $author_last, $title);
             $test_book->save();
-            $author2 = "Stephen King";
+            $author_first2 = "Stephen";
+            $author_last2 = "King";
             $due_date2 = "Misery";
-            $test_book2 = new Book($author2, $due_date2);
+            $test_book2 = new Book($author_first2, $author_last2, $due_date2);
             $test_book2->save();
 
             //Act

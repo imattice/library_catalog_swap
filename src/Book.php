@@ -2,20 +2,27 @@
 class Book
 
 {
-    private $author;
+    private $author_first;
+    private $author_last;
     private $title;
     private $id;
 
-    function __construct($author, $title, $id=null)
+    function __construct($author_first, $author_last, $title, $id=null)
     {
-        $this->author = $author;
+        $this->author_first = $author_first;
+        $this->author_last = $author_last;
         $this->id = $id;
         $this->title = $title;
     }
 
-    function getAuthor()
+    function getAuthorFirst()
     {
-        return $this->author;
+        return $this->author_first;
+    }
+
+    function getAuthorLast()
+    {
+        return $this->author_last;
     }
 
     function getTitle()
@@ -28,9 +35,14 @@ class Book
         return $this->id;
     }
 
-    function setAuthor($new_author)
+    function setAuthorFirst($new_author_first)
     {
-        $this->author = $new_author;
+        $this->author_first = $new_author_first;
+    }
+
+    function setAuthorLast($new_author_last)
+    {
+        $this->author_last = $new_author_last;
     }
 
     function setTitle($new_title)
@@ -40,14 +52,20 @@ class Book
 
     function save()
     {
-        $GLOBALS['DB']->exec("INSERT INTO books (author, title) VALUES ('{$this->getAuthor()}', '{$this->getTitle()}')");
+        $GLOBALS['DB']->exec("INSERT INTO books (author_first, author_last, title) VALUES ('{$this->getAuthorFirst()}', '{$this->getAuthorLast()}' '{$this->getTitle()}')");
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
-    function updateAuthor($new_author)
+    function updateAuthorFirst($new_author_first)
     {
-        $GLOBALS['DB']->exec("UPDATE books set author = '{$new_author}' WHERE id = {$this->getId()};");
-        $this->setAuthor($new_author);
+        $GLOBALS['DB']->exec("UPDATE books set author_first = '{$new_author_first}' WHERE id = {$this->getId()};");
+        $this->setAuthorFirst($new_author_first);
+    }
+
+    function updateAuthorLast($new_author_last)
+    {
+        $GLOBALS['DB']->exec("UPDATE books set author_last = '{$new_author_last}' WHERE id = {$this->getId()};");
+        $this->setAuthorLast($new_author_last);
     }
 
     function updateTitle($new_title)
@@ -66,10 +84,11 @@ class Book
         $returned_books = $GLOBALS['DB']->query("SELECT * FROM books;");
         $books = array();
         foreach($returned_books as $book) {
-            $author = $book['author'];
+            $author_first = $book['author_first'];
+            $author_last = $book['author_last'];
             $title = $book['title'];
             $id = $book['id'];
-            $new_book = new Book($author, $title, $id);
+            $new_book = new Book($author_first, $author_last, $title, $id);
             array_push($books, $new_book);
         }
         return $books;

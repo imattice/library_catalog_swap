@@ -68,3 +68,26 @@ DELETE ONES
     Input title2: "Misery"
     Input author2: "Stephen King"
     Output: ["Stephen King", "Misery"]
+
+SEARCH
+// Test Book:searchByTitle()
+9) Return all titles matching search
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Input title2: "Misery"
+    Input author2: "Stephen King"
+    Input title3: "Cat on a Hot Tin Roof"
+    Input author3: "Tennessee Williams"
+    Input search: "Cat"
+    Output: [["Dr. Seuss", "The Cat in the Hat"], ["Tennessee Williams", "Cat on a Hot Tin Roof"]]
+
+// Test Book:searchByAuthor()
+9) Return all titles matching search
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Input title2: "Misery"
+    Input author2: "Stephen King"
+    Input title3: "The Dark Tower"
+    Input author3: "Stephen King"
+    Input search: "Cat"
+    Output: [["Dr. Seuss", "The Cat in the Hat"], ["Tennessee Williams", "Cat on a Hot Tin Roof"]]
