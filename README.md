@@ -7,7 +7,13 @@
 
 ## Description
 
-This program will store tasks inputed by the user into a MySQL database.
+This program will store books inputed by the user into a MySQL database.
+
+## PROGRESS REPORT
+
+We have one table in our database (Books). Our approach was to complete the user cases one at a time so that we have a fully functional website at the end of each case.
+
+We have completed the first two cases and thus have CRUD as well as search capability active for our one Books database.
 
 ## Setup
 
