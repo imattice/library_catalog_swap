@@ -1,0 +1,70 @@
+SPEC SHEET FOR LIBRARY
+
+SAVES/GETS/DELETEALLS
+
+// Test Book::save()
+1) Save a book
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Output: ["Dr. Seuss", "The Cat in the Hat"]
+// Test Book::getAll()
+2) Get all books
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Input title2: "Misery"
+    Input author2: "Stephen King"
+    Output: [["Dr. Seuss", "The Cat in the Hat"], ["Stephen King", "Misery"]]
+// Test Book::deleteAll()
+3) Delete all books
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Input title2: "Misery"
+    Input author2: "Stephen King"
+    Output: []
+
+RETURN IDS
+
+// Test Book::getId()
+4) Return id for a book object
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Input id: {auto-incremented id}
+    Output: {same auto-incremented id}
+
+FIND IDS
+
+// Test Book::find($id)
+5) Find books by id
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Input id: {auto-incremented id}
+    Input title2: "Misery"
+    Input author2: "Stephen King"
+    Input id: {auto-incremented id2}
+    Output: [{auto-incremented id1}, "Dr. Seuss", "The Cat in the Hat"]
+
+UPDATES
+
+// Test Book::updateAuthor()
+6) Update a book's name
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Input new author: "Theodore Geissel"
+    Output: "Theodore Geissel"
+
+// Test Book::updateTitle()
+7) Update a book's title
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Input new title: "Green Eggs and Ham"
+    Output: "Green Eggs and Ham"
+
+DELETE ONES
+
+// Test Book::deleteOne()
+8) Delete one book
+    Input title: "The Cat in the Hat"
+    Input author: "Dr. Seuss"
+    Input title2: "Misery"
+    Input author2: "Stephen King"
+    Output: ["Stephen King", "Misery"]
