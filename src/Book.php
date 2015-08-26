@@ -44,17 +44,25 @@ class Book
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
-    function updateAuthor($new_author) {
+    function updateAuthor($new_author)
+    {
         $GLOBALS['DB']->exec("UPDATE books set author = '{$new_author}' WHERE id = {$this->getId()};");
         $this->setAuthor($new_author);
     }
 
-    function updateTitle($new_title) {
+    function updateTitle($new_title)
+    {
         $GLOBALS['DB']->exec("UPDATE books set title = '{$new_title}' WHERE id = {$this->getId()};");
         $this->setTitle($new_title);
     }
 
-    static function getAll() {
+    function deleteOne()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
+    }
+
+    static function getAll()
+    {
         $returned_books = $GLOBALS['DB']->query("SELECT * FROM books;");
         $books = array();
         foreach($returned_books as $book) {
@@ -67,11 +75,13 @@ class Book
         return $books;
     }
 
-    static function deleteAll() {
+    static function deleteAll()
+    {
         $GLOBALS['DB']->exec("DELETE FROM books;");
     }
 
-    static function find($search_id){
+    static function find($search_id)
+    {
         $found_book = null;
         $books = Book::getAll();
         foreach($books as $book) {

@@ -131,5 +131,24 @@
             //Assert
             $this->assertEquals("Green Eggs and Ham", $test_book->getTitle());
         }
+
+        function testDeleteOne() {
+            //Arrange
+            $author = "Dr. Seuss";
+            $title = "The Cat in the Hat";
+            $test_book = new Book($author, $title);
+            $test_book->save();
+            $author2 = "Stephen King";
+            $due_date2 = "Misery";
+            $test_book2 = new Book($author2, $due_date2);
+            $test_book2->save();
+
+            //Act
+            $test_book->deleteOne();
+            $result = Book::getAll();
+
+            //Assert
+            $this->assertEquals($test_book2, $result[0]);
+        }
     }
 ?>
