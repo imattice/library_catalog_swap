@@ -52,7 +52,10 @@ class Book
 
     function save()
     {
-        $GLOBALS['DB']->exec("INSERT INTO books (author_first, author_last, title) VALUES ('{$this->getAuthorFirst()}', '{$this->getAuthorLast()}' '{$this->getTitle()}')");
+        $GLOBALS['DB']->exec("INSERT INTO books (author_first, author_last, title) VALUES
+            ('{$this->getAuthorFirst()}',
+            '{$this->getAuthorLast()}',
+            '{$this->getTitle()}')");
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
@@ -110,6 +113,48 @@ class Book
             }
         }
         return $found_book;
+    }
+
+    static function searchByTitle($search_string)
+    {
+        $clean_search_string = preg_replace('/[^A-Za-z0-9\s]/', '', $search_string);
+        $lower_clean_search_string = strtolower($clean_search_string);
+        $exploded_lower_clean_search_string = explode(' ', $lower_clean_search_string);
+        $books = Book::getAll();
+        $matches = array();
+        foreach ($exploded_lower_clean_search_string as $word) {
+            foreach ($books as $book) {
+                $title = $book->getTitle();
+                $clean_title= preg_replace('/[^A-Za-z0-9\s]/', '', $title);
+                $lower_clean_title = strtolower($clean_title);
+                $explode_lower_clean_title = explode(' ', $lower_clean_title);
+                foreach ($explode_lower_clean_title as $title_pieces){
+                    if($title_pieces == $word) {
+                        array_push($matches, $book);
+                    }
+                }
+            }
+        }
+        return $matches;
+    }
+
+    static function searchByAuthorLast($search_string)
+    {
+        $clean_search_string = preg_replace('/[^A-Za-z0-9\s]/', '', $search_string);
+        $lower_clean_search_string = strtolower($clean_search_string);
+        $books = Book::getAll();
+        $matches = array();
+        foreach ($books as $book) {
+            $author = $book->getAuthorLast();
+            $clean_author = preg_replace('/[^A-Za-z0-9\s]/', '', $author);
+            $lower_clean_author = strtolower($clean_author);
+            $title = $book->getTitle();
+            if($lower_clean_author == $lower_clean_search_string) {
+                array_push($matches, $book);
+            }
+        }
+
+        return $matches;
     }
 }
 ?>

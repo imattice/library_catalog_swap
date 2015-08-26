@@ -71,7 +71,7 @@ DELETE ONES
 
 SEARCH
 // Test Book:searchByTitle()
-9) Return all titles matching search
+x9) Return all titles matching search
     Input title: "The Cat in the Hat"
     Input author: "Dr. Seuss"
     Input title2: "Misery"
@@ -81,8 +81,8 @@ SEARCH
     Input search: "Cat"
     Output: [["Dr. Seuss", "The Cat in the Hat"], ["Tennessee Williams", "Cat on a Hot Tin Roof"]]
 
-// Test Book:searchByAuthor()
-9) Return all titles matching search
+// Test Book:searchByAuthorLast()
+10) Return all titles matching search
     Input title: "The Cat in the Hat"
     Input author: "Dr. Seuss"
     Input title2: "Misery"

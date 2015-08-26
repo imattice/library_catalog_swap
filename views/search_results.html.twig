@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Search Results</title>
+    </head>
+    <body>
+        <h1>Search Results</h1>
+        <a href="/"><h3>Home</h3></a>
+
+        {% if matches is not empty%}
+            <ul>
+                {% set dumpArray = [] %}
+                {% for match in matches %}
+                    {% if match not in dumpArray %}
+                        <li><a href="/books/{{ match.getId }}/edit">{{ match.getTitle }}</a> - {{ match.getAuthorLast }}</li>
+                    {% set dumpArray = dumpArray|merge([match]) %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+    </body>
+</html>
