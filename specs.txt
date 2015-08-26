@@ -46,14 +46,14 @@ FIND IDS
 UPDATES
 
 // Test Book::updateAuthor()
-6) Update a book's name
+6x) Update a book's name
     Input title: "The Cat in the Hat"
     Input author: "Dr. Seuss"
     Input new author: "Theodore Geissel"
     Output: "Theodore Geissel"
 
 // Test Book::updateTitle()
-7) Update a book's title
+7x) Update a book's title
     Input title: "The Cat in the Hat"
     Input author: "Dr. Seuss"
     Input new title: "Green Eggs and Ham"

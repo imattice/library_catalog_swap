@@ -82,5 +82,54 @@
             //Assert
             $this->assertEquals(true, is_numeric($result));
         }
+
+        function test_find() {
+            //Arrange
+            $author = "Dr. Seuss";
+            $title = "The Cat in the Hat";
+            $test_book = new Book($author, $title);
+            $test_book->save();
+            $author2 = "Stephen King";
+            $due_date2 = "Misery";
+            $test_book2 = new Book($author2, $due_date2);
+            $test_book2->save();
+
+            //Act
+            $id = $test_book->getId();
+            $result = Book::find($id);
+
+            //Assert
+            $this->assertEquals($test_book, $result);
+        }
+
+        function testUpdateAuthor() {
+            //Arrange
+            $author = "Dr. Seuss";
+            $title = "The Cat in the Hat";
+            $test_book = new Book($author, $title);
+            $test_book->save();
+            $new_author = "Theodore Geissel";
+
+            //Act
+            $test_book->updateAuthor($new_author);
+
+            //Assert
+            $this->assertEquals("Theodore Geissel", $test_book->getAuthor());
+        }
+
+        function testUpdateTitle() {
+            //Arrange
+            $author = "Dr. Seuss";
+            $title = "The Cat in the Hat";
+            $test_book = new Book($author, $title);
+            $test_book->save();
+            $new_title = "Green Eggs and Ham";
+
+            //Act
+            $test_book->updateTitle($new_title);
+
+            //Assert
+            $this->assertEquals("Green Eggs and Ham", $test_book->getTitle());
+        }
     }
 ?>
