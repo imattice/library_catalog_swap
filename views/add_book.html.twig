@@ -1,36 +1,48 @@
 <html>
     <head>
-        <title>Home</title>
+        <title>Librarian Home</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     </head>
     <body>
-        <h1>Add Book</h1>
-        <a href="/">Home</a>
-        <form action="/add_book" method="post">
+        <div class="container">
+            <h1>Librarian's Home Page</h1>
+            <form action='/librarian_home' method='post'>
 
-            <label for="author_first">Author First Name:</label>
-            <input type="text" name="author_first" id="author_first">
+                <h2><strong>Title:</strong></h2>
+                <label for='title'></label>
+                <input id='title' name='title' type='text'>
 
-            <label for="author_last">Author Last Name:</label>
-            <input type="text" name="author_last" id="author_last"><br>
+                <h2><strong>Author:</strong></h2>
+                <label for='first_name'>
+                    First Name:</label>
+                <input id='first_name' name='first_name' type='text'>
 
-            <label for="title">Title:</label>
-            <input type="text" name="title" id="title">
+                <label for='last_name'>Last Name:</label>
+                <input id='last_name' name='last_name' type='text'>
+                <br>
+                <br>
+                <button type='submit'>Add Book</button>
+            </form>
 
-            <button type="submit">Submit</button>
-        </form>
+            {% if books is not empty %}
+                <p>Here are all of your current titles:</p>
+                <ul>
+                    {% for book in books %}
+                    <li><a href="/books/{{ book.getId }}">{{ book.getTitle }}<br>
+                        {% set authors = book.getAuthor %}
+                        {% for author in authors %}
+                        {{ author.getLastName }}, {{ author.getFirstName }}</li>
+                        {% endfor %}
 
-        {%  if books is not empty %}
-            <ul>
-                {% for book in books %}
-                    <li><a href="/books/{{ book.getId }}/edit">{{ book.getTitle }}</a> - {{ book.getAuthorLast }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>There are no books yet!</p>
-        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-        <form action="/delete_books" method="post">
-            <button type="submit">Delete All Books</button>
-        </form>
+            <a href='/'>Library Home</a>
+
+            <form action="/clear_library" method="post">
+                <button type="submit" class="btn-danger">Delete library!</button>
+            </form>
+        </div>
     </body>
 </html>

@@ -198,24 +198,33 @@
 
         // function testSearchByLastName() {
         //     //Arrange
-        //     $first_name = "Dr.";
-        //     $last_name = "Seuss";
-        //     $title = "The Cat in the Hat";
-        //     $test_book = new Book( $title);
-        //     $test_book->save();
-        //     $first_name2 = "Stephen";
-        //     $last_name2 = "King";
+        //     $first_name = "Stephen";
+        //     $last_name = "King";
+        //     $test_author = new Author($first_name, $last_name);
         //     $title2 = "Misery";
         //     $test_book2 = new Book( $title2);
         //     $test_book2->save();
-        //     $first_name3 = "Stephen";
-        //     $last_name3 = "King";
+        //
+        //
+        //     $first_name = "Stephen";
+        //     $last_name = "King";
+        //     $test_author = new Author($first_name, $last_name);
         //     $title3 = "The Dark Tower";
         //     $test_book3 = new Book( $title3);
         //     $test_book3->save();
-        //     $search_string = "King";
+        //
+        //     $first_name2 = "Dr.";
+        //     $last_name2 = "Seuss";
+        //     $test_author2 = new Author($first_name2, $last_name2);
+        //     $title = "The Cat in the Hat";
+        //     $test_book = new Book( $title);
+        //     $test_book->save();
+        //
+        //
+        //     $search_string = "K!ing";
         //
         //     //Act
+        //
         //     $result = Book::searchByLastName($search_string);
         //
         //     //Assert

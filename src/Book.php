@@ -100,43 +100,63 @@ class Book
 
     function addAuthor($author)
    {
-       $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$author->getId()}, {$this->getId()});");
+       $GLOBALS['DB']->exec("INSERT INTO authors_books (authors_id, books_id) VALUES ({$author->getId()}, {$this->getId()});");
    }
 
    function getAuthor()
    {
-       $query = $GLOBALS['DB']->query("SELECT author_id FROM authors_books WHERE book_id = {$this->getId()};");
-       $author_ids = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
+       $returned_authors = $GLOBALS['DB']->query("SELECT t_authors.* FROM t_books
+           JOIN authors_books ON (t_books.id = authors_books.books_id)
+           JOIN t_authors ON (authors_books.authors_id = t_authors.id)
+           WHERE t_books.id = {$this->getId()};");
        $authors = array();
-       foreach ($author_ids as $id) {
-           $author_id = $id['author_id'];
-           $result = $GLOBALS['DB']->query("SELECT * FROM t_authors WHERE id = {$author_id};");
-           $returned_author = $result->fetchAll(PDO::FETCH_ASSOC);
-
-           $first_name = $returned_author[0]['first_name'];
-           $last_name = $returned_author[0]['last_name'];
-           $id = $returned_author[0]['id'];
+       foreach ($returned_authors as $author) {
+           $first_name = $author['first_name'];
+           $last_name = $author['last_name'];
+           $id = $author['id'];
            $new_author = new Author($first_name, $last_name, $id);
            array_push($authors, $new_author);
        }
        return $authors;
    }
 
-    // static function searchByAuthorLast($search_string)
+    ////////////////////
+    ////////Search functionality not yet functioning.
+    ////////////////////
+    // static function searchByLastName($search_string)
     // {
+    //     //Takes in search query (ex: John Steinbeck) and removes foreign characters
     //     $clean_search_string = preg_replace('/[^A-Za-z0-9\s]/', '', $search_string);
+    //     //Takes search query and makes it all lowercase.
     //     $lower_clean_search_string = strtolower($clean_search_string);
-    //     $books = Book::getAll();
+    //     //Gets all the authors.
+    //     $authors = Author::getAll();
+    //     //Creates an empty array.
     //     $matches = array();
-    //     foreach ($books as $book) {
-    //         $author = $book->getAuthorLast();
-    //         $clean_author = preg_replace('/[^A-Za-z0-9\s]/', '', $author);
-    //         $lower_clean_author = strtolower($clean_author);
-    //         $title = $book->getTitle();
+    //     //Takes each author from the list of authors...
+    //     foreach ($authors as $author) {
+    //         //...and only looks at their last name.
+    //         $author_last_name = $author->getLastName();
+    //         // $clean_author = preg_replace('/[^A-Za-z0-9\s]/', '', $author);
+    //         // $lower_clean_author = strtolower($clean_author);
+    //         $coffee = $author_last_name->getId();
+    //
+    //
+    //         //if the author that is found is equal to the search string, then it will look for the book.
     //         if($lower_clean_author == $lower_clean_search_string) {
-    //             array_push($matches, $book);
+    //
+    //             //takes author id and looks for books in the database that match that author_id through the join table
+    //             $book_match = $GLOBALS['DB']->query("SELECT t_books.* FROM
+    //             t_authors JOIN t_authors ON (authors.id = authors_books.author_id)
+    //             JOIN t_books ON (authors_books.book_id = books.id)
+    //             WHERE authors.id = {coffee};");
+    //
+    //             //takes the resulting book id and finds the book title
+    //             $book_result = $book_match->getTitle();
+    //
+    //             //pushes the resulting titles into the result array
+    //             array_push($matches, $book_result);
     //         }
     //     }
     //
