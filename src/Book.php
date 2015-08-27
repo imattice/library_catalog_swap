@@ -105,19 +105,24 @@ class Book
 
    function getAuthor()
    {
-
+       //join statement which starts at t_books and links each table by id's, step by step.
+       //Starts@ t_books w/ id for books -> authors_books w/ book_id and matches it to the associated author_id -> takes the author id and links it to the original author id in t_authors -> looks for this specific instance of author.  This results in an associated array with keys first_name, last_name, and id
        $returned_authors = $GLOBALS['DB']->query("SELECT t_authors.* FROM t_books
            JOIN authors_books ON (t_books.id = authors_books.books_id)
            JOIN t_authors ON (authors_books.authors_id = t_authors.id)
            WHERE t_books.id = {$this->getId()};");
+       //creates empty array to insert the linked author information
        $authors = array();
+       //goes through the associated array created by the join statement and builds a new author object from that information
        foreach ($returned_authors as $author) {
            $first_name = $author['first_name'];
            $last_name = $author['last_name'];
            $id = $author['id'];
            $new_author = new Author($first_name, $last_name, $id);
+           //pushes the newly created author objects to the empty array
            array_push($authors, $new_author);
        }
+       //returns the newly filled array with the resulting author objects
        return $authors;
    }
 
