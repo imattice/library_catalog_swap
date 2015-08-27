@@ -173,7 +173,8 @@
         function testAddBook()
         {
             //Arrange
-            $first_name = "John Steinbeck";
+            $first_name = "John";
+            $last_name = "Steinbeck";
             $test_author = new Author($first_name, $last_name);
             $test_author->save();
 
@@ -192,7 +193,8 @@
         function testGetBook()
         {
             //Arrange
-            $first_name = "John Steinbeck";
+            $first_name = "John";
+            $last_name = "Steinbeck";
             $test_author = new Author($first_name, $last_name);
             $test_author->save();
 

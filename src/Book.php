@@ -108,6 +108,7 @@ class Book
        $query = $GLOBALS['DB']->query("SELECT author_id FROM authors_books WHERE book_id = {$this->getId()};");
        $author_ids = $query->fetchAll(PDO::FETCH_ASSOC);
 
+
        $authors = array();
        foreach ($author_ids as $id) {
            $author_id = $id['author_id'];
