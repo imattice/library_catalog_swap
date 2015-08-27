@@ -19,52 +19,52 @@
             //Patron::deleteAll();
         }
 
-        function testGetAuthorFirst()
+        function testGetFirstName()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             //Act
-            $result = $test_author->getAuthorFirst();
+            $result = $test_author->getFirstName();
             //Assert
-            $this->assertEquals($author_first, $result);
+            $this->assertEquals($first_name, $result);
         }
 
-        function testGetAuthorLast()
+        function testGetLastName()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             //Act
-            $result = $test_author->getAuthorLast();
+            $result = $test_author->getLastName();
             //Assert
-            $this->assertEquals($author_last, $result);
+            $this->assertEquals($last_name, $result);
         }
 
-        function testSetAuthorFirst()
+        function testSetFirstName()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             //Act
-            $test_author->setAuthorFirst("J.K.");
-            $result = $test_author->getAuthorFirst();
+            $test_author->setFirstName("J.K.");
+            $result = $test_author->getFirstName();
             //Assert
             $this->assertEquals("J.K.", $result);
         }
 
-        function testSetAuthorLast()
+        function testSetLastName()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             //Act
-            $test_author->setAuthorLast("Rowling");
-            $result = $test_author->getAuthorLast();
+            $test_author->setLastName("Rowling");
+            $result = $test_author->getLastName();
             //Assert
             $this->assertEquals("Rowling", $result);
         }
@@ -72,9 +72,9 @@
         function testGetId()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             $test_author->save();
             //Act
             $result = $test_author->getId();
@@ -84,9 +84,9 @@
         function testSave()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             //Act
             $test_author->save();
             //Assert
@@ -96,13 +96,13 @@
         function testGetAll()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             $test_author->save();
-            $author_first2 = "John";
-            $author_last2 = "Steinbeck";
-            $test_author2 = new Author($author_first2, $author_last2);
+            $first_name2 = "John";
+            $last_name2 = "Steinbeck";
+            $test_author2 = new Author($first_name2, $last_name2);
             $test_author2->save();
             //Act
             $result = Author::getAll();
@@ -112,14 +112,14 @@
         function testDeleteAll()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             $test_author->save();
 
-            $author_first2 = "John";
-            $author_last2 = "Steinbeck";
-            $test_author2 = new Author($author_first2, $author_last2);
+            $first_name2 = "John";
+            $last_name2 = "Steinbeck";
+            $test_author2 = new Author($first_name2, $last_name2);
             $test_author2->save();
 
             //Act
@@ -133,11 +133,11 @@
         function testUpdate()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             $test_author->save();
-            $column_to_update = "author_first";
+            $column_to_update = "first_name";
             $new_patron_information = "Jane";
 
             //Act
@@ -145,20 +145,20 @@
             $result = Author::getAll();
 
             //Assert
-            $this->assertEquals("Jane", $result[0]->getAuthorFirst());
+            $this->assertEquals("Jane", $result[0]->getFirstName());
         }
 
         function testDeleteOne()
         {
             //Arrange
-            $author_first = "J.K.";
-            $author_last = "Rowling";
-            $test_author = new Author($author_first, $author_last);
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
             $test_author->save();
 
-            $author_first2 = "John";
-            $author_last2 = "Steinbeck";
-            $test_author2 = new Author($author_first2, $author_last2);
+            $first_name2 = "John";
+            $last_name2 = "Steinbeck";
+            $test_author2 = new Author($first_name2, $last_name2);
             $test_author2->save();
 
             //Act
@@ -170,49 +170,49 @@
         ///////////
         ///////////////All tests pass up to this point. Recieving errors for tests below.
         //////////
-        // function testAddBook()
-        // {
-        //     //Arrange
-        //     $author_first = "John Steinbeck";
-        //     $test_author = new Author($author_first, $author_last);
-        //     $test_author->save();
-        //
-        //     $title = "Grapes of Wrath";
-        //     $test_book = new Book($title);
-        //     $test_book->save();
-        //
-        //     //Act
-        //     $test_author->addBook($test_book);
-        //
-        //     //Assert
-        //     $this->assertEquals($test_author->getBook(), [$test_book]);
-        //
-        // }
-        //
-        // function testGetBook()
-        // {
-        //     //Arrange
-        //     $author_first = "John Steinbeck";
-        //     $test_author = new Author($author_first, $author_last);
-        //     $test_author->save();
-        //
-        //     $title = "Grapes of Wrath";
-        //     $test_book = new Book($title);
-        //     $test_book->save();
-        //
-        //     $title2 = "Cannery Row";
-        //     $test_book2 = new Book($title2);
-        //     $test_book2->save();
-        //
-        //
-        //     //Act
-        //     $test_author->addBook($test_book);
-        //     $test_author->addBook($test_book2);
-        //
-        //     $result = $test_author->getBook();
-        //
-        //     //Assert
-        //     $this->assertEquals([$test_book, $test_book2], $result);
-        // }
+        function testAddBook()
+        {
+            //Arrange
+            $first_name = "John Steinbeck";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $title = "Grapes of Wrath";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            //Act
+            $test_author->addBook($test_book);
+
+            //Assert
+            $this->assertEquals($test_author->getBook(), [$test_book]);
+
+        }
+
+        function testGetBook()
+        {
+            //Arrange
+            $first_name = "John Steinbeck";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $title = "Grapes of Wrath";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = "Cannery Row";
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+
+
+            //Act
+            $test_author->addBook($test_book);
+            $test_author->addBook($test_book2);
+
+            $result = $test_author->getBook();
+
+            //Assert
+            $this->assertEquals([$test_book, $test_book2], $result);
+        }
     }
  ?>

@@ -98,6 +98,31 @@ class Book
         return $matches;
     }
 
+    function addAuthor($author)
+   {
+       $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$author->getId()}, {$this->getId()});");
+   }
+
+   function getAuthor()
+   {
+       $query = $GLOBALS['DB']->query("SELECT author_id FROM authors_books WHERE book_id = {$this->getId()};");
+       $author_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+
+       $authors = array();
+       foreach ($author_ids as $id) {
+           $author_id = $id['author_id'];
+           $result = $GLOBALS['DB']->query("SELECT * FROM t_authors WHERE id = {$author_id};");
+           $returned_author = $result->fetchAll(PDO::FETCH_ASSOC);
+
+           $first_name = $returned_author[0]['first_name'];
+           $last_name = $returned_author[0]['last_name'];
+           $id = $returned_author[0]['id'];
+           $new_author = new Author($first_name, $last_name, $id);
+           array_push($authors, $new_author);
+       }
+       return $authors;
+   }
+
     // static function searchByAuthorLast($search_string)
     // {
     //     $clean_search_string = preg_replace('/[^A-Za-z0-9\s]/', '', $search_string);

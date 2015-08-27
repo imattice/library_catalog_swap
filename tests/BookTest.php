@@ -145,27 +145,78 @@
             $this->assertEquals([$test_book, $test_book3], $result);
         }
 
-        // function testSearchByAuthorLast() {
+        function testAddAuthor()
+        {
+            //Arrange
+            $title = "Grapes of Wrath";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $title2 = "Cannery Row";
+            $test_book2 = new Book($title2);
+            $test_book2->save();
+
+            $first_name = "John";
+            $last_name  = "Steinbeck";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            //Act
+            $test_book->addAuthor($test_author);
+
+            //Assert
+            $this->assertEquals($test_book->getAuthor(), [$test_author]);
+
+        }
+
+        function testGetAuthor()
+        {
+            //Arrange
+            $title = "Grapes of Wrath";
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $first_name = "J.K.";
+            $last_name = "Rowling";
+            $test_author = new Author($first_name, $last_name);
+            $test_author->save();
+
+            $first_name2 = "John";
+            $last_name2 = "Steinbeck";
+            $test_author2 = new Author($first_name2, $last_name2);
+            $test_author2->save();
+
+            //Act
+            $test_book->addAuthor($test_author);
+            $test_book->addAuthor($test_author2);
+
+            $result = $test_book->getAuthor();
+
+            //Assert
+            $this->assertEquals([$test_author, $test_author2], $result);
+        }
+
+        // function testSearchByLastName() {
         //     //Arrange
-        //     $author_first = "Dr.";
-        //     $author_last = "Seuss";
+        //     $first_name = "Dr.";
+        //     $last_name = "Seuss";
         //     $title = "The Cat in the Hat";
         //     $test_book = new Book( $title);
         //     $test_book->save();
-        //     $author_first2 = "Stephen";
-        //     $author_last2 = "King";
+        //     $first_name2 = "Stephen";
+        //     $last_name2 = "King";
         //     $title2 = "Misery";
         //     $test_book2 = new Book( $title2);
         //     $test_book2->save();
-        //     $author_first3 = "Stephen";
-        //     $author_last3 = "King";
+        //     $first_name3 = "Stephen";
+        //     $last_name3 = "King";
         //     $title3 = "The Dark Tower";
         //     $test_book3 = new Book( $title3);
         //     $test_book3->save();
         //     $search_string = "King";
         //
         //     //Act
-        //     $result = Book::searchByAuthorLast($search_string);
+        //     $result = Book::searchByLastName($search_string);
         //
         //     //Assert
         //     $this->assertEquals([$test_book2, $test_book3], $result);

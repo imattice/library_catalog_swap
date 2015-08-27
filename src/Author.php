@@ -1,35 +1,35 @@
 <?php
 class Author
 {
-    private $author_first;
-    private $author_last;
+    private $first_name;
+    private $last_name;
     private $id;
 
-    function __construct($author_first, $author_last, $id=null)
+    function __construct($first_name, $last_name, $id=null)
     {
-        $this->author_first = $author_first;
-        $this->author_last = $author_last;
+        $this->first_name = $first_name;
+        $this->last_name = $last_name;
         $this->id = $id;
     }
 
-    function getAuthorFirst()
+    function getFirstName()
     {
-        return $this->author_first;
+        return $this->first_name;
     }
 
-    function getAuthorLast()
+    function getLastName()
     {
-        return $this->author_last;
+        return $this->last_name;
     }
 
-    function setAuthorFirst($new_author_first)
+    function setFirstName($new_first_name)
     {
-        $this->author_first = $new_author_first;
+        $this->first_name = $new_first_name;
     }
 
-    function setAuthorLast($new_author_last)
+    function setLastName($new_last_name)
     {
-        $this->author_last = $new_author_last;
+        $this->last_name = $new_last_name;
     }
 
     function getId()
@@ -39,7 +39,7 @@ class Author
 
     function save()
     {
-        $GLOBALS['DB']->exec("INSERT INTO t_authors (author_first, author_last) VALUES ('{$this->getAuthorFirst()}', '{$this->getAuthorLast()}');");
+        $GLOBALS['DB']->exec("INSERT INTO t_authors (first_name, last_name) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}');");
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
@@ -55,38 +55,38 @@ class Author
     ///////////
     ///////////////All tests pass up to this point. Recieving errors for tests pertaining to functions commented-out below.
     //////////
-    // function addBook($book)
-    // {
-    //     $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$this->getId()}, {$book->getId()};)");
-    // }
-    //
-    // function getBook()
-    // {
-    //     $query = $GLOBALS['DB']->query("SELECT book_id FROM authors_books WHERE author_id = {$this->getId()};");
-    //     $book_ids = $query->fetchAll(PDO::FETCH_ASSOC);
-    //
-    //     $books = array();
-    //     foreach ($book_ids as $id) {
-    //         $book_id = $id['book_id'];
-    //         $result = $GLOBALS['DB']->query("SELECT * FROM t_books WHERE id = {$book_id};");
-    //         $returned_book = $result->fetchAll(PDO::FETCH_ASSOC);
-    //
-    //         $title = $returned_book[0]['title'];
-    //         $id = $returned_book[0]['id'];
-    //         $new_book = new Book($title, $id);
-    //         array_push($books, $new_book);
-    //     }
-    //     return $books;
-    // }
+    function addBook($book)
+    {
+        $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$this->getId()}, {$book->getId()});");
+    }
+
+    function getBook()
+    {
+        $query = $GLOBALS['DB']->query("SELECT book_id FROM authors_books WHERE author_id = {$this->getId()};");
+        $book_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $books = array();
+        foreach ($book_ids as $id) {
+            $book_id = $id['book_id'];
+            $result = $GLOBALS['DB']->query("SELECT * FROM t_books WHERE id = {$book_id};");
+            $returned_book = $result->fetchAll(PDO::FETCH_ASSOC);
+
+            $title = $returned_book[0]['title'];
+            $id = $returned_book[0]['id'];
+            $new_book = new Book($title, $id);
+            array_push($books, $new_book);
+        }
+        return $books;
+    }
     static function getAll()
     {
         $returned_authors = $GLOBALS['DB']->query("SELECT * FROM t_authors;");
         $authors = array();
         foreach($returned_authors as $author) {
-            $author_first = $author['author_first'];
-            $author_last = $author['author_last'];
+            $first_name = $author['first_name'];
+            $last_name = $author['last_name'];
             $id = $author['id'];
-            $new_author = new Author($author_first, $author_last, $id);
+            $new_author = new Author($first_name, $last_name, $id);
             array_push($authors, $new_author);
         }
         return $authors;
