@@ -1,57 +1,53 @@
 <?php
 class Author
 {
-    private $author_name;
+    private $author_first;
+    private $author_last;
     private $id;
-    function __construct($author_name, $id=null)
+
+    function __construct($author_first, $author_last, $id=null)
     {
-        $this->author_name = $author_name;
+        $this->author_first = $author_first;
+        $this->author_last = $author_last;
         $this->id = $id;
     }
 
-    // function getAuthorFirst()
-    // {
-    //     return $this->author_first;
-    // }
-    //
-    // function getAuthorLast()
-    // {
-    //     return $this->author_last;
-    // }
-
-
-    // function setAuthorFirst($new_author_first)
-    // {
-    //     $this->author_first = [$new_author_first];
-    // }
-    //
-    // function setAuthorLast($new_author_last)
-    // {
-    //     $this->author_last = $new_author_last;
-    // }
-
-    function setAuthorName($new_author_name)
+    function getAuthorFirst()
     {
-        $this->author_name = (string) $new_author_name;
+        return $this->author_first;
     }
-    function getAuthorName()
+
+    function getAuthorLast()
     {
-        return $this->author_name;
+        return $this->author_last;
     }
+
+    function setAuthorFirst($new_author_first)
+    {
+        $this->author_first = $new_author_first;
+    }
+
+    function setAuthorLast($new_author_last)
+    {
+        $this->author_last = $new_author_last;
+    }
+
     function getId()
     {
         return $this->id;
     }
+
     function save()
     {
-        $GLOBALS['DB']->exec("INSERT INTO t_authors (author_name) VALUES ('{$this->getAuthorName()}');");
+        $GLOBALS['DB']->exec("INSERT INTO t_authors (author_first, author_last) VALUES ('{$this->getAuthorFirst()}', '{$this->getAuthorLast()}');");
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
-    function update($new_author_name)
-    {
-        $GLOBALS['DB']->exec("UPDATE t_authors SET author_name = '{$new_author_name}' WHERE id = {$this->getId()};");
-        $this->setAuthorName($new_author_name);
-    }
+
+    function update($column_to_update, $new_author_information)
+     {
+         $GLOBALS['DB']->exec("UPDATE t_authors SET {$column_to_update} = '{$new_author_information}' WHERE id = {$this->getId()};");
+     }
+
     function deleteOne()
     {
         $GLOBALS['DB']->exec("DELETE FROM t_authors WHERE id = {$this->getId()};");
@@ -87,13 +83,15 @@ class Author
         $returned_authors = $GLOBALS['DB']->query("SELECT * FROM t_authors;");
         $authors = array();
         foreach($returned_authors as $author) {
-            $author_name = $author['author_name'];
+            $author_first = $author['author_first'];
+            $author_last = $author['author_last'];
             $id = $author['id'];
-            $new_author = new Author($author_name, $id);
+            $new_author = new Author($author_first, $author_last, $id);
             array_push($authors, $new_author);
         }
         return $authors;
     }
+
     static function deleteAll()
     {
         $GLOBALS['DB']->exec("DELETE FROM t_authors;");
